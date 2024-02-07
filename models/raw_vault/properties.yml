@@ -1,0 +1,37 @@
+version: 2
+
+models:
+  - name: raw_vault__hub_customer
+    config:
+      materialized: incremental
+      unique_key: C_HASHKEY
+      
+  - name: raw_vault__hub_orders
+    config:
+      materialized: incremental
+      unique_key: O_HASHKEY
+
+  - name: raw_vault__link_customer_order
+    config:
+      materialized: incremental
+      unique_key: LCO_HASHKEY
+
+  - name: raw_vault__sat_customer
+    config:
+      materialized: incremental
+      unique_key: C_HASHKEY
+
+  - name: raw_vault__sat_orders
+    config: 
+      materialized: incremental
+      unique_key: O_HASHKEY
+
+  - name: raw_vault__ref_region
+    config:
+      materialized: incremental
+      unique_key: R_HASHKEY
+
+  - name: raw_vault__ref_nation
+    config:
+      materialized: incremental
+      unique_key: 
