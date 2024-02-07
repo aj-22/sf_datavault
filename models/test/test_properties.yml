@@ -1,0 +1,8 @@
+version: 2
+
+models:
+  - name: hashdiff_test
+    config:
+      materialized: incremental
+      incremental_strategy: hashdiff_insert
+      unique_key: hashdiff

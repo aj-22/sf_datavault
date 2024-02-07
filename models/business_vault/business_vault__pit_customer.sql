@@ -1,0 +1,11 @@
+SELECT
+C.HASHKEY AS HASHKEY,
+CURRENT_TIMESTAMP() AS PIT_LOAD_DTS,
+C.HUB_LOAD_DTS AS C_HUB_LOAD_DTS,
+INFO.SAT_LOAD_DTS AS C_SAT_INFO_LOAD_DTS,
+ACC.SAT_LOAD_DTS AS C_SAT_ACC_LOAD_DTS
+FROM {{ ref('raw_vault__hub_customer') }} C
+LEFT JOIN {{ ref('raw_vault__sat_customer_acc') }} ACC
+ON C.HASHKEY = ACC.HASHKEY
+LEFT JOIN {{ ref('raw_vault__sat_customer_info') }} INFO
+ON C.HASHKEY = INFO.HASHKEY

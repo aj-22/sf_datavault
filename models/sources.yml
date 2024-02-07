@@ -13,3 +13,9 @@ sources:
       - name: REGION
       - name: ORDERS
       - name: SUPPLIER
+
+  - name: TEST
+    database: DV_DB
+    schema: TEST
+    tables:
+      - name: SRC

@@ -16,7 +16,12 @@ models:
       materialized: incremental
       unique_key: LCO_HASHKEY
 
-  - name: raw_vault__sat_customer
+  - name: raw_vault__sat_customer_info
+    config:
+      materialized: incremental
+      unique_key: C_HASHKEY
+
+  - name: raw_vault__sat_customer_acc
     config:
       materialized: incremental
       unique_key: C_HASHKEY

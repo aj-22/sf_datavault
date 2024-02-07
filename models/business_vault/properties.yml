@@ -1,0 +1,7 @@
+version: 2
+
+models:
+  - name: business_vault__pit_customer
+    config:
+      materialized: incremental
+      unique_key: 

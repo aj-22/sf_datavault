@@ -1,8 +1,11 @@
 SELECT
-O_HASHKEY,
+{{ SHA_binary(Columns = [
+  'O_SRC',
+  'O_ORDERKEY'
+])}} AS HASHKEY,
 O_ORDERKEY,
-O_LOAD_DTS AS LOAD_DTS,
-'SF_SAMPLE' AS SRC
+CURRENT_TIMESTAMP() AS HUB_LOAD_DTS,
+O_SRC AS SRC
 FROM {{ ref('staging__orders') }}
 {%- if is_incremental() %}
   where LOAD_DTS > (select max(LOAD_DTS) from {{ this }})

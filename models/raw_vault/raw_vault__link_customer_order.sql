@@ -1,12 +1,28 @@
+with link as (
 SELECT
-{{ SHA_binary(Columns=['O_HASHKEY','C_HASHKEY'] ) }} AS LCO_HASHKEY,
-O.O_HASHKEY,
-C.C_HASHKEY,
-O.O_LOAD_DTS as LOAD_DTS,
-'SF_SAMPLE' AS SRC
+{{ SHA_binary(Columns = [
+  'O_SRC',
+  'O_ORDERKEY'
+])}} AS O_HASHKEY,
+
+{{ SHA_binary(Columns = [
+  'O_SRC',
+  'O_CUSTKEY'
+])}} AS C_HASHKEY,
+CURRENT_TIMESTAMP() as LINK_LOAD_DTS,
+O_SRC AS SRC
 FROM {{ ref('staging__orders') }} O
-LEFT JOIN {{ ref('staging__customer') }} C
-ON O.O_CUSTKEY = C.C_CUSTKEY
 {%- if is_incremental() %}
   where LOAD_DTS > (select max(LOAD_DTS) from {{ this }})
 {% endif -%}
+)
+SELECT
+{{ SHA_binary(Columns = [
+  'O_ORDERKEY',
+  'O_CUSTKEY'
+])}} AS LCO_HASHKEY,
+O_HASHKEY,
+C_HASHKEY,
+LOAD_DTS
+SRC
+FROM link
