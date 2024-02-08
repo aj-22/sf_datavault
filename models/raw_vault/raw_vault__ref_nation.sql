@@ -2,7 +2,7 @@ SELECT
 {{ SHA_binary(Columns = [
   'N_SRC',
   'N_NATIONKEY'
-])}} AS N_HASHKEY,
+])}} AS HASHKEY,
 N_NATIONKEY,
 N_NAME,
 N_REGIONKEY,

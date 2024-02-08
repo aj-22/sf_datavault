@@ -5,4 +5,4 @@ models:
     config:
       materialized: incremental
       incremental_strategy: hashdiff_insert
-      unique_key: HASHKEY
+      unique_key: HASHDIFF
