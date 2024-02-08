@@ -3,17 +3,13 @@ version: 2
 models:
   - name: staging__customer
     config:
-      materialized: incremental
-      unique_key: C_HASHKEY
+      materialized: table
   - name: staging__nation
     config:
-      materialized: incremental
-      unique_key: N_HASHKEY
+      materialized: table
   - name: staging__orders
     config:
-      materialized: incremental
-      unique_key: O_HASHKEY
+      materialized: table
   - name: staging__region
     config:
-      materialized: incremental
-      unique_key: R_HASHKEY
+      materialized: table

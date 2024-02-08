@@ -4,4 +4,5 @@ models:
   - name: business_vault__pit_customer
     config:
       materialized: incremental
-      unique_key: 
+      incremental_strategy: hashdiff_insert
+      unique_key: HASHKEY

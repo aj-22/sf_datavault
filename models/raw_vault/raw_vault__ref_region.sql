@@ -13,6 +13,3 @@ R_LOAD_DTS AS REF_LOAD_DTS,
 ]) }} AS HASHDIFF,
 R_SRC AS SRC
 FROM {{ ref('staging__region') }}
-{%- if is_incremental() %}
-  where LOAD_DTS > (select max(LOAD_DTS) from {{ this }})
-{% endif -%}
