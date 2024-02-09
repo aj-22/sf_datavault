@@ -14,6 +14,8 @@ SELECT
   'O_SRC',
   'O_CUSTKEY'
 ])}} AS C_HASHKEY,
+O_ORDERKEY,
+O_CUSTKEY,
 CURRENT_TIMESTAMP() as LINK_LOAD_DTS,
 O_SRC AS SRC
 FROM {{ ref('staging__orders') }} 

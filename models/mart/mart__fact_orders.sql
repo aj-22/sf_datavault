@@ -2,7 +2,8 @@ WITH LINK AS (
     SELECT
     LCO_HASHKEY,
     O_HASHKEY,
-    C_HASHKEY
+    C_HASHKEY,
+    SRC
     FROM {{ ref('raw_vault__link_customer_order') }}
 ),
 ORDERS AS (
@@ -25,7 +26,8 @@ SELECT
     O.O_ORDERDATE,
     O.O_ORDERPRIORITY,
     O.O_CLERK,
-    O.O_SHIPPRIORITY
+    O.O_SHIPPRIORITY,
+    L.SRC
 FROM LINK L
 LEFT JOIN ORDERS O
 ON L.O_HASHKEY = O.HASHKEY

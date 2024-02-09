@@ -2,7 +2,8 @@ WITH HUB AS (
     SELECT
     HASHKEY,
     C_CUSTKEY,
-    HUB_LOAD_DTS
+    HUB_LOAD_DTS,
+    SRC AS SRC
     FROM {{ ref('raw_vault__hub_customer') }}
 ),
 PIT AS (
@@ -24,6 +25,7 @@ SAT_ACC AS (
     C_COMMENT,
     SAT_LOAD_DTS
     FROM {{ ref('raw_vault__sat_customer_acc') }}
+    QUALIFY LEAD(SAT_LOAD_DTS) OVER (PARTITION BY HASHKEY ORDER BY SAT_LOAD_DTS) IS NULL
 ),
 SAT_INFO AS (
     SELECT
@@ -34,16 +36,19 @@ SAT_INFO AS (
     C_PHONE,
     SAT_LOAD_DTS
     FROM {{ ref('raw_vault__sat_customer_info') }}
+    QUALIFY LEAD(SAT_LOAD_DTS) OVER (PARTITION BY HASHKEY ORDER BY SAT_LOAD_DTS) IS NULL
 )
 SELECT
     H.HASHKEY,
+    H.C_CUSTKEY,
     I.C_NAME,
     I.C_ADDRESS,
     I.C_NATIONKEY,
     I.C_PHONE,    
     A.C_ACCTBAL,
     A.C_MKTSEGMENT,
-    A.C_COMMENT
+    A.C_COMMENT,
+    H.SRC AS SRC
 FROM HUB H
 LEFT JOIN SAT_ACC A ON 
 A.HASHKEY = H.HASHKEY

@@ -11,4 +11,4 @@ O_COMMENT,
 CURRENT_TIMESTAMP() AS O_LOAD_DTS,
 'SF_SAMPLE' AS O_SRC
 FROM {{ source('TPCH','ORDERS') }} O
-where O_ORDERDATE = '{{ var('load_date') }}'
+where O_ORDERDATE <= '{{ var('load_date') }}'
