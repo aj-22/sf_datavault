@@ -8,6 +8,8 @@ R_NAME,
 R_COMMENT,
 R_LOAD_DTS AS REF_LOAD_DTS,
 {{ SHA_binary(Columns = [
+    'R_SRC',
+    'R_REGIONKEY',
     'R_NAME',
     'R_COMMENT'
 ]) }} AS HASHDIFF,
