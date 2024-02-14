@@ -36,6 +36,7 @@ insert into model.staging__orders values
 (114, 200, 'F', 8000.00, '1992-01-10','2-HIGH','Clerk007','0','test record',CURRENT_TIMESTAMP(),'MANUAL');
 
 -- Execute dbt run to load the data
+-- dbt run --exclude staging
 
 update model.staging__customer set C_ACCTBAL = 500 where C_CUSTKEY = 100 and C_SRC = 'MANUAL';
 ```
