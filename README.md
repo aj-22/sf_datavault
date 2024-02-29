@@ -39,4 +39,5 @@ insert into model.staging__orders values
 -- dbt run --exclude staging
 
 update model.staging__customer set C_ACCTBAL = 500 where C_CUSTKEY = 100 and C_SRC = 'MANUAL';
+update model.staging__customer set C_Nationkey = 23 where C_CUSTKEY = 100 and C_SRC = 'MANUAL';
 ```
